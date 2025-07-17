@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Artist Portfolio | Blender Specialist</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4d8ee6;  /* Blue accent color */
+            --dark: #000000;     /* Black background */
+            --light: #ffffff;    /* White text */
+            --gray: #a0a0a0;     /* Light gray for secondary text */
+        }
+        
+        body {
+            font-family: 'Rubik', sans-serif;
+            color: var(--light);
+            background-color: var(--dark);
+            overflow-x: hidden;
+        }
+        
+        .navbar {
+            /* background-color: rgba(0, 0, 0, 0.9) !important; */
+            transition: all 0.3s ease;
+        }
+        
+        .navbar.scrolled {
+            background-color: rgba(0, 0, 0, 0.95) !important;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .navbar-brand, .nav-link {
+            color: var(--light) !important;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary) !important;
+        }
+        
+        .hero-section, .services-section, .skills-section, .contact-section   {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            background-image: url('wlc-bg1.jpg');
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            z-index: 2;
+        }
+        
+        .hero-3d-model {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0.8;
+            max-width: 50%;
+            height: auto;
+        }
+        
+        .section-title {
+            font-family: "Oswald", sans-serif;
+            text-transform: uppercase;
+            position: relative;
+            display: inline-block;
+            margin-bottom: 60px;
+            color: var(--light);
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 3px;
+            background: var(--primary);
+            bottom: -10px;
+            left: 0;
+        }
+        
+        .portfolio-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            background: #111;
+        }
+        
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+            /* box-shadow: 0 15px 40px rgba(77, 142, 230, 0.2); */
+        }
+        
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+        
+        .skill-bar {
+            height: 6px;
+            background: #333;
+            border-radius: 3px;
+            margin-bottom: 20px;
+        }
+        
+        .skill-progress {
+            height: 100%;
+            border-radius: 3px;
+            background: var(--primary);
+        }
+        
+        .card {
+            background: #111;
+            border: none;
+            color: var(--light);
+        }
+        
+        .text-muted {
+            color: var(--gray) !important;
+        }
+        
+        .btn-outline-primary {
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .btn-outline-primary:hover {
+            background: var(--primary);
+            color: var(--dark);
+        }
+        
+        .btn-outline-dark {
+            color: var(--light);
+            border-color: var(--light);
+        }
+        
+        .btn-outline-dark:hover {
+            background: var(--light);
+            color: var(--dark);
+        }
+        
+        .form-control {
+            background-color: #111;
+            border: 1px solid #333;
+            color: var(--light);
+        }
+        
+        .form-control:focus {
+            background-color: #111;
+            border-color: var(--primary);
+            color: var(--light);
+            box-shadow: 0 0 0 0.25rem rgba(77, 142, 230, 0.25);
+        }
+        
+        hr {
+            background-color: #333;
+        }
+        
+        /* Animation classes */
+        .fade-in {
+            animation: fadeIn 1s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .slide-up {
+            animation: slideUp 0.8s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body data-bs-spy="scroll" data-bs-target=".navbar">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top py-3">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">BLEND<span style="color: var(--primary);">ART</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#services">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#portfolio">Portfolio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#skills">Skills</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#testimonials">Testimonials</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+                <a href="#contact" class="btn btn-primary ms-lg-3">Hire Me</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="container mt-5">
+            <div class="row align-items-center">
+                <div class="col-lg-6 hero-content slide-up">
+                    <h6 class="text-uppercase" style="color: var(--primary); font-family: 'Oswald', sans-serif;">3D Artist & Blender Specialist</h6>
+                    <h1 class="display-4 fw-bold mb-4">Bringing Products to Life with <span style="color: var(--primary);">3D Art</span></h1>
+                    <p class="lead mb-5">I create stunning 3D models and visualizations that make your products stand out in advertisements and marketing materials.</p>
+                    <div class="d-flex gap-3">
+                        <a href="#portfolio" class="btn btn-primary px-4 py-3">View My Work</a>
+                        <a href="#contact" class="btn btn-outline-light px-4 py-3">Get in Touch</a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <!-- Placeholder for 3D model viewer or image -->
+                    <img src="fdccCvWAZQak.jpg" alt="3D Model Example" class="img-fluid hero-3d-model fade-in">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="mt-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-5 mb-5 mb-lg-0">
+                    <img src="author2.png" alt="About Me" class="img-fluid rounded shadow">
+                </div>
+                <div class="col-lg-7 ps-lg-5">
+                    <h2 class="section-title">About Me</h2>
+                    <h4 class="mb-4">Professional 3D Artist specializing in product visualization</h4>
+                    <p class="mb-4">With over 7 years of experience in 3D modeling and rendering using Blender, I help brands showcase their products in the most compelling way possible. My work focuses on photorealistic product renders that elevate advertising campaigns and marketing materials.</p>
+                    <p class="mb-5">I combine technical expertise with artistic vision to create models that not only look great but also communicate your product's value proposition effectively.</p>
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <div class="d-flex align-items-center">
+                                <div class="rounded-circle p-2 me-3" style="background: rgba(77, 142, 230, 0.1);">
+                                    <i class="fas fa-cube" style="color: var(--primary);"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-0">3D Modeling</h5>
+                                    <p class="mb-0">Precision and detail</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="d-flex align-items-center">
+                                <div class="rounded-circle p-2 me-3" style="background: rgba(77, 142, 230, 0.1);">
+                                    <i class="fas fa-lightbulb" style="color: var(--primary);"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-0">Concept Art</h5>
+                                    <p class="mb-0">Creative visualization</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="d-flex align-items-center">
+                                <div class="rounded-circle p-2 me-3" style="background: rgba(77, 142, 230, 0.1);">
+                                    <i class="fas fa-ad" style="color: var(--primary);"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-0">Ad Ready</h5>
+                                    <p class="mb-0">Marketing focused</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="d-flex align-items-center">
+                                <div class="rounded-circle p-2 me-3" style="background: rgba(77, 142, 230, 0.1);">
+                                    <i class="fas fa-tachometer-alt" style="color: var(--primary);"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-0">Fast Turnaround</h5>
+                                    <p class="mb-0">Efficient workflow</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services-section py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="section-title">My Services</h2>
+                    <p class="lead mb-5">I offer comprehensive 3D modeling and visualization services tailored for advertising and marketing needs.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body p-4">
+                            <div class="rounded-circle p-3 mb-4 mx-auto" style="width: 60px; height: 60px; background: rgba(77, 142, 230, 0.1);">
+                                <i class="fas fa-cube" style="color: var(--primary); font-size: 1.5rem;"></i>
+                            </div>
+                            <h4 class="mb-3">Product Modeling</h4>
+                            <p class="text-muted">High-quality 3D models of your products with accurate dimensions and details, ready for use in advertisements, e-commerce, or presentations.</p>
+                            <ul class="list-unstyled text-muted">
+                                <li class="mb-2"><i class="fas fa-check-circle" style="color: var(--primary);"></i> Photorealistic details</li>
+                                <li class="mb-2"><i class="fas fa-check-circle" style="color: var(--primary);"></i> Multiple format exports</li>
+                                <li class="mb-2"><i class="fas fa-check-circle" style="color: var(--primary);"></i> Optimized for rendering</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body p-4">
+                            <div class="rounded-circle p-3 mb-4 mx-auto" style="width: 60px; height: 60px; background: rgba(77, 142, 230, 0.1);">
+                                <i class="fas fa-image" style="color: var(--primary); font-size: 1.5rem;"></i>
+                            </div>
+                            <h4 class="mb-3">Advertising Renders</h4>
+                            <p class="text-muted">Stunning high-resolution renders of your products in various settings, perfect for print ads, digital campaigns, and social media.</p>
+                            <ul class="list-unstyled text-muted">
+                                <li class="mb-2"><i class="fas fa-check-circle" style="color: var(--primary);"></i> Multiple angles</li>
+                                <li class="mb-2"><i class="fas fa-check-circle" style="color: var(--primary);"></i> Custom lighting setups</li>
+                                <li class="mb-2"><i class="fas fa-check-circle" style="color: var(--primary);"></i> Background integration</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body p-4">
+                            <div class="rounded-circle p-3 mb-4 mx-auto" style="width: 60px; height: 60px; background: rgba(77, 142, 230, 0.1);">
+                                <i class="fas fa-film" style="color: var(--primary); font-size: 1.5rem;"></i>
+                            </div>
+                            <h4 class="mb-3">Animation</h4>
+                            <p class="text-muted">Engaging product animations that showcase features, demonstrate functionality, or simply add visual appeal to your marketing materials.</p>
+                            <ul class="list-unstyled text-muted">
+                                <li class="mb-2"><i class="fas fa-check-circle" style="color: var(--primary);"></i> 360° rotations</li>
+                                <li class="mb-2"><i class="fas fa-check-circle" style="color: var(--primary);"></i> Exploded views</li>
+                                <li class="mb-2"><i class="fas fa-check-circle" style="color: var(--primary);"></i> Interactive elements</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-5 my-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="section-title">My Portfolio</h2>
+                    <p class="lead mb-5">A selection of my recent 3D modeling projects for advertising and product visualization.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="portfolio-item">
+                        <img src="portfolio-1.jpeg" alt="Portfolio Item" class="img-fluid">
+                        <div class="portfolio-overlay text-center px-3">
+                            <h4 class="text-white mb-3">Cosmetic Product</h4>
+                            <p class="text-white mb-4">High-end beauty product rendering for print ad campaign</p>
+                            <a href="#" class="btn btn-light">View Project</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="portfolio-item">
+                        <img src="portfolio-2.jpg" alt="Portfolio Item" class="img-fluid">
+                        <div class="portfolio-overlay text-center px-3">
+                            <h4 class="text-white mb-3">Electronics</h4>
+                            <p class="text-white mb-4">Smartphone model for e-commerce product page</p>
+                            <a href="#" class="btn btn-light">View Project</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="portfolio-item">
+                        <img src="portfolio-5.jpg" alt="Portfolio Item" class="img-fluid">
+                        <div class="portfolio-overlay text-center px-3">
+                            <h4 class="text-white mb-3">Packaging</h4>
+                            <p class="text-white mb-4">Beverage bottle and label design visualization</p>
+                            <a href="#" class="btn btn-light">View Project</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="portfolio-item">
+                        <img src="portfolio-5.jpg" alt="Portfolio Item" class="img-fluid">
+                        <div class="portfolio-overlay text-center px-3">
+                            <h4 class="text-white mb-3">Furniture</h4>
+                            <p class="text-white mb-4">Modern chair design for catalog and website</p>
+                            <a href="#" class="btn btn-light">View Project</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="portfolio-item">
+                        <img src="portfolio-2.jpg" alt="Portfolio Item" class="img-fluid">
+                        <div class="portfolio-overlay text-center px-3">
+                            <h4 class="text-white mb-3">Automotive</h4>
+                            <p class="text-white mb-4">Car accessory visualization for marketing materials</p>
+                            <a href="#" class="btn btn-light">View Project</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="portfolio-item">
+                        <img src="portfolio-1.jpeg" alt="Portfolio Item" class="img-fluid">
+                        <div class="portfolio-overlay text-center px-3">
+                            <h4 class="text-white mb-3">Jewelry</h4>
+                            <p class="text-white mb-4">Luxury watch rendering for advertisement</p>
+                            <a href="#" class="btn btn-light">View Project</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <a href="#" class="btn btn-outline-primary">View Full Portfolio</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills-section py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <h2 class="section-title mb-5">My Skills</h2>
+                    <p class="mb-5">I've mastered a comprehensive set of tools and techniques to deliver top-quality 3D models and visualizations for advertising and marketing purposes.</p>
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="p-2 rounded me-3" style="background: rgba(77, 142, 230, 0.1);">
+                                    <i class="fas fa-cog" style="color: var(--primary);"></i>
+                                </div>
+                                <h5 class="mb-0">Technical Skills</h5>
+                            </div>
+                            <ul class="list-unstyled text-muted">
+                                <li class="mb-2"><i class="fas fa-check" style="color: var(--primary);"></i> Advanced Blender</li>
+                                <li class="mb-2"><i class="fas fa-check" style="color: var(--primary);"></i> Substance Painter</li>
+                                <li class="mb-2"><i class="fas fa-check" style="color: var(--primary);"></i> UV Unwrapping</li>
+                                <li class="mb-2"><i class="fas fa-check" style="color: var(--primary);"></i> Retopology</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="p-2 rounded me-3" style="background: rgba(77, 142, 230, 0.1);">
+                                    <i class="fas fa-palette" style="color: var(--primary);"></i>
+                                </div>
+                                <h5 class="mb-0">Artistic Skills</h5>
+                            </div>
+                            <ul class="list-unstyled text-muted">
+                                <li class="mb-2"><i class="fas fa-check" style="color: var(--primary);"></i> Photorealistic Texturing</li>
+                                <li class="mb-2"><i class="fas fa-check" style="color: var(--primary);"></i> Lighting Setup</li>
+                                <li class="mb-2"><i class="fas fa-check" style="color: var(--primary);"></i> Composition</li>
+                                <li class="mb-2"><i class="fas fa-check" style="color: var(--primary);"></i> Color Theory</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="skill-item mb-4">
+                        <div class="d-flex justify-content-between mb-2">
+                            <h6 class="mb-0">Blender 3D</h6>
+                            <span>95%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 95%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item mb-4">
+                        <div class="d-flex justify-content-between mb-2">
+                            <h6 class="mb-0">Photorealistic Rendering</h6>
+                            <span>90%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item mb-4">
+                        <div class="d-flex justify-content-between mb-2">
+                            <h6 class="mb-0">Product Modeling</h6>
+                            <span>92%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 92%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item mb-4">
+                        <div class="d-flex justify-content-between mb-2">
+                            <h6 class="mb-0">Texture Painting</h6>
+                            <span>88%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 88%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item mb-4">
+                        <div class="d-flex justify-content-between mb-2">
+                            <h6 class="mb-0">Animation</h6>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 85%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-5 my-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="section-title">Client Testimonials</h2>
+                    <p class="lead mb-5">What my clients say about my 3D modeling and visualization services.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body p-4">
+                            <div class="d-flex align-items-center mb-4">
+                                <!-- <img src="testimonial1.jpg" alt="Client" class="rounded-circle me-3"> -->
+                                <div>
+                                    <h5 class="mb-0">Sarah Johnson</h5>
+                                    <p class="text-muted mb-0">Marketing Director, BeautyCo</p>
+                                </div>
+                            </div>
+                            <p class="text-muted">"The 3D renders of our new skincare line were absolutely stunning. They perfectly captured the premium quality of our products and were instrumental in our successful product launch campaign."</p>
+                            <div style="color: var(--primary);">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body p-4">
+                            <div class="d-flex align-items-center mb-4">
+                                <!-- <img src="testimonial1.jpg" alt="Client" class="rounded-circle me-3"> -->
+                                <div>
+                                    <h5 class="mb-0">Michael Chen</h5>
+                                    <p class="text-muted mb-0">Product Manager, TechGadgets</p>
+                                </div>
+                            </div>
+                            <p class="text-muted">"We needed high-quality 3D models of our new device for our website before the physical product was ready. The models were so accurate that customers couldn't tell they weren't photographs."</p>
+                            <div style="color: var(--primary);">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body p-4">
+                            <div class="d-flex align-items-center mb-4">
+                                <!-- <img src="testimonial1.jpg" alt="Client" class="rounded-circle me-3"> -->
+                                <div>
+                                    <h5 class="mb-0">David Wilson</h5>
+                                    <p class="text-muted mb-0">Creative Director, AdAgency</p>
+                                </div>
+                            </div>
+                            <p class="text-muted">"Working with this artist on our automotive client's campaign was a pleasure. The attention to detail in the models and the ability to make quick revisions saved us time and budget."</p>
+                            <div style="color: var(--primary);">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="section-title">Get In Touch</h2>
+                    <p class="lead mb-5">Have a project in mind? Let's discuss how I can help bring your products to life with 3D art.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 mb-5 mb-lg-0">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body p-4 text-center">
+                            <div class="rounded-circle p-3 mb-4 mx-auto" style="width: 70px; height: 70px; background: rgba(77, 142, 230, 0.1);">
+                                <i class="fas fa-envelope" style="color: var(--primary); font-size: 1.5rem;"></i>
+                            </div>
+                            <h4 class="mb-3">Email Me</h4>
+                            <p class="text-muted mb-1">hello@blendart.com</p>
+                            <p class="text-muted">contact@blendart.com</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-5 mb-lg-0">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body p-4 text-center">
+                            <div class="rounded-circle p-3 mb-4 mx-auto" style="width: 70px; height: 70px; background: rgba(77, 142, 230, 0.1);">
+                                <i class="fas fa-phone-alt" style="color: var(--primary); font-size: 1.5rem;"></i>
+                            </div>
+                            <h4 class="mb-3">Call Me</h4>
+                            <p class="text-muted mb-1">+1 (555) 123-4567</p>
+                            <p class="text-muted">Mon-Fri, 9am-5pm</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-5 mb-lg-0">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body p-4 text-center">
+                            <div class="rounded-circle p-3 mb-4 mx-auto" style="width: 70px; height: 70px; background: rgba(77, 142, 230, 0.1);">
+                                <i class="fas fa-map-marker-alt" style="color: var(--primary); font-size: 1.5rem;"></i>
+                            </div>
+                            <h4 class="mb-3">Location</h4>
+                            <p class="text-muted mb-1">San Francisco, CA</p>
+                            <p class="text-muted">Available for remote work worldwide</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="col-lg-8 mx-auto">
+                    <div class="card border-0 shadow">
+                        <div class="card-body p-5">
+                            <form>
+                                <div class="row">
+                                    <div class="col-md-6 mb-4">
+                                        <label for="name" class="form-label">Your Name</label>
+                                        <input type="text" class="form-control" id="name" placeholder="John Doe">
+                                    </div>
+                                    <div class="col-md-6 mb-4">
+                                        <label for="email" class="form-label">Your Email</label>
+                                        <input type="email" class="form-control" id="email" placeholder="john@example.com">
+                                    </div>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="subject" class="form-label">Subject</label>
+                                    <input type="text" class="form-control" id="subject" placeholder="Project Inquiry">
+                                </div>
+                                <div class="mb-4">
+                                    <label for="message" class="form-label">Your Message</label>
+                                    <textarea class="form-control" id="message" rows="5" placeholder="Tell me about your project..."></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary px-4 py-3">Send Message</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-lg-4 mb-5 mb-lg-0">
+                    <h3 class="text-white mb-4">BLEND<span style="color: var(--primary);">ART</span></h3>
+                    <p class="text-white-50 mb-4">Professional 3D modeling and visualization services specializing in product advertising and marketing materials.</p>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon"><i class="fab fa-behance"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-artstation"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-dribbble"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-5 mb-md-0">
+                    <h5 class="text-white mb-4">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#home" class="text-white-50">Home</a></li>
+                        <li class="mb-2"><a href="#about" class="text-white-50">About</a></li>
+                        <li class="mb-2"><a href="#services" class="text-white-50">Services</a></li>
+                        <li class="mb-2"><a href="#portfolio" class="text-white-50">Portfolio</a></li>
+                        <li class="mb-2"><a href="#contact" class="text-white-50">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-5 mb-md-0">
+                    <h5 class="text-white mb-4">Services</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-white-50">Product Modeling</a></li>
+                        <li class="mb-2"><a href="#" class="text-white-50">Advertising Renders</a></li>
+                        <li class="mb-2"><a href="#" class="text-white-50">3D Animation</a></li>
+                        <li class="mb-2"><a href="#" class="text-white-50">Concept Art</a></li>
+                        <li class="mb-2"><a href="#" class="text-white-50">Packaging Design</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h5 class="text-white mb-4">Newsletter</h5>
+                    <p class="text-white-50 mb-4">Subscribe to get updates on my latest projects and 3D art tips.</p>
+                    <form class="mb-3">
+                        <div class="input-group">
+                            <input type="email" class="form-control" placeholder="Your Email">
+                            <button class="btn btn-primary" type="button">Subscribe</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <hr class="my-5 bg-secondary">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="text-white-50 mb-0">&copy; 2023 BlendArt. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <p class="text-white-50 mb-0">Made with <i class="fas fa-heart" style="color: var(--primary);"></i> and Blender</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Animation on scroll
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.slide-up, .fade-in');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.2;
+                
+                if (elementPosition < screenPosition) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        }
+
+        // Initialize animations
+        window.addEventListener('load', animateOnScroll);
+        window.addEventListener('scroll', animateOnScroll);
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
