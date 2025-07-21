@@ -15,11 +15,22 @@
         rel="stylesheet">
 
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap"
+        rel="stylesheet">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
+
+
     <style>
         :root {
             --primary: #4d8ee6;
             /* Blue accent color */
-            --dark: #000000;
+            --dark: #070707;
             /* Black background */
             --light: #ffffff;
             /* White text */
@@ -28,7 +39,7 @@
         }
 
         body {
-            font-family: 'Rubik', sans-serif;
+            font-family: "Inter", sans-serif;
             color: var(--light);
             background-color: var(--dark);
             overflow-x: hidden;
@@ -82,7 +93,7 @@
         }
 
         .section-title {
-            font-family: "Oswald", sans-serif;
+            font-family: "DM Sans", sans-serif;
             text-transform: uppercase;
             position: relative;
             display: inline-block;
@@ -135,16 +146,16 @@
         }
 
         .skill-bar {
-            height: 6px;
+            height: 1px;
             background: #333;
-            border-radius: 3px;
             margin-bottom: 20px;
         }
 
         .skill-progress {
             height: 100%;
-            border-radius: 3px;
             background: var(--primary);
+            width: 0;
+            transition: width 0s;
         }
 
         .card {
@@ -181,6 +192,9 @@
             color: var(--gray) !important;
         }
 
+        .btn-primary {
+            background-color: var(--primary) !important;
+        }
 
         .btn-outline-primary {
             color: var(--primary);
@@ -213,7 +227,7 @@
             border-color: #ccc !important;
             color: var(--light) !important;
             box-shadow: none !important;
-            
+
         }
 
         hr {
@@ -282,6 +296,91 @@
             background: #222222;
         }
 
+        .square2 {
+            z-index:-2;
+            width: 24px;
+            height: 24px;
+            position: absolute;
+            left: 79%;
+            top: -1%;
+            background: #111111;
+        }
+
+        .square1 {
+            z-index:-2;
+            width: 12px;
+            height: 12px;
+            position: absolute;
+            left: 76%;
+            top: 4%;
+            background: #111111;
+        }
+
+        .bg-circle {
+            z-index: -2;
+            width: 425px;
+            height: 425px;
+            position: absolute;
+            left: 5%;
+            top: 4%;
+            border-radius: 50%;
+            background: #111111;
+        }
+
+        .rel {
+            position: relative;
+        }
+
+        .bg-lines span:first-child {
+            left: 10%;
+        }
+
+        .bg-lines span:nth-child(2) {
+            left: 20%;
+        }
+
+        .bg-lines span:nth-child(3) {
+            left: 30%;
+        }
+
+        .bg-lines span:nth-child(4) {
+            left: 40%;
+        }
+
+        .bg-lines span:nth-child(5) {
+            left: 50%;
+        }
+
+        .bg-lines span:nth-child(6) {
+            left: 60%;
+        }
+
+        .bg-lines span:nth-child(7) {
+            left: 70%;
+        }
+
+        .bg-lines span:nth-child(8) {
+            left: 80%;
+        }
+
+        .bg-lines span:nth-child(9) {
+            left: 90%;
+        }
+
+        .bg-lines span:nth-child(10) {
+            left: 100%;
+        }
+
+        .bg-lines span {
+            top: 0;
+            z-index: -1;
+            width: 1px;
+            height: 100%;
+            position: absolute;
+            animation: leftRightOne 18s infinite;
+            background: hsla(0, 0%, 100%, .05);
+        }
+
 
 
         /* Animation classes */
@@ -312,6 +411,18 @@
             to {
                 opacity: 1;
                 transform: translateY(0);
+            }
+        }
+
+        @keyframes leftRightOne {
+
+            0%,
+            to {
+                transform: translateX(0)
+            }
+
+            50% {
+                transform: translateX(-100px)
             }
         }
     </style>
@@ -357,6 +468,7 @@
     <!-- Hero Section -->
     <section id="home" class="hero-section">
         <div class="container mt-5">
+
             <div class="row align-items-center">
                 <div class="col-lg-6 hero-content slide-up">
                     <h6 class="text-uppercase" style="color: var(--primary); font-family: 'Oswald', sans-serif;">3D
@@ -379,12 +491,16 @@
     </section>
 
     <!-- About Section -->
-    <section id="about" class="mt-5">
+    <section id="about" class="rel z-1">
+
         <div class="container">
+
             <div class="row align-items-center">
-                <div class="col-lg-5 mb-5 mb-lg-0">
+                <div class="col-lg-5 my-5 mb-lg-0 rel">
+                    <div class="bg-circle"></div>
                     <img src="author1.png" alt="About Me" class="img-fluid rounded shadow">
-                
+                    <div class="square1"></div>
+                    <div class="square2"></div>
                 </div>
                 <div class="col-lg-7 ps-lg-5">
                     <h2 class="section-title">About Me</h2>
@@ -442,6 +558,9 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="bg-lines">
+            <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
         </div>
     </section>
 
@@ -581,8 +700,8 @@
     </section>
 
     <!-- Portfolio Section -->
-    <section id="portfolio" class="py-5 my-5">
-        <div class="container">
+    <section id="portfolio" class="rel z-1">
+        <div class="container py-5">
             <div class="row justify-content-center">
                 <div class="col-lg-8 text-center">
                     <h2 class="section-title">My Portfolio</h2>
@@ -655,6 +774,9 @@
             <div class="text-center mt-4">
                 <a href="#" class="btn btn-outline-primary">View Full Portfolio</a>
             </div>
+        </div>
+        <div class="bg-lines">
+            <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
         </div>
     </section>
 
@@ -758,7 +880,7 @@
     </section>
 
     <!-- Testimonials Section -->
-    <section id="testimonials" class="py-5 my-5">
+    <section id="testimonials" class="py-5 rel z-1">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-8 text-center">
@@ -894,6 +1016,9 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="bg-lines">
+            <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
         </div>
     </section>
 
@@ -1069,18 +1194,50 @@
             });
         }
 
-        // Initialize animations
-        window.addEventListener('load', animateOnScroll);
-        window.addEventListener('scroll', animateOnScroll);
+        document.addEventListener('DOMContentLoaded', function () {
+            const skillItems = document.querySelectorAll('.skill-item');
 
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
+            function animateSkill(item) {
+                const progressBar = item.querySelector('.skill-progress');
+                const percentageSpan = item.querySelector('span');
+                const targetWidth = progressBar.style.width;
+                const targetPercentage = percentageSpan.textContent;
 
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
+                progressBar.style.width = '0';
+                percentageSpan.textContent = '0%';
+                progressBar.style.transition = 'width 1.5s ease-in-out';
+
+                setTimeout(() => {
+                    progressBar.style.width = targetWidth;
+
+                    let current = 0;
+                    const increment = targetPercentage.replace('%', '') / 50;
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= parseFloat(targetPercentage)) {
+                            current = parseFloat(targetPercentage);
+                            clearInterval(timer);
+                        }
+                        percentageSpan.textContent = Math.floor(current) + '%';
+                    }, 20);
+                }, 100);
+            }
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const item = entry.target;
+                        if (!item.classList.contains('animated')) {
+                            item.classList.add('animated');
+                            animateSkill(item);
+                        }
+                        observer.unobserve(item);
+                    }
                 });
+            }, { threshold: 0.5 });
+
+            skillItems.forEach(item => {
+                observer.observe(item);
             });
         });
     </script>
