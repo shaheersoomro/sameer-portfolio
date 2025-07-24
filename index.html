@@ -10,32 +10,15 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
-
     <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
         rel="stylesheet">
-
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
-
-
     <link
         href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap"
         rel="stylesheet">
-
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
         rel="stylesheet">
-
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
-
-    <!-- Particles.js -->
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-
-    <!-- Tilt.js (add before closing body) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tilt.js/1.2.1/tilt.jquery.min.js"></script>
-
-
     <style>
         :root {
             --primary: #4d8ee6;
@@ -410,7 +393,7 @@
         }
 
         .shape-1 {
-            background: #1b1b1b;
+            background: #333333;
             width: 300px;
             height: 300px;
             top: 20%;
@@ -419,7 +402,7 @@
         }
 
         .shape-2 {
-            background: #6c6c6d;
+            background: #444444;
             width: 400px;
             height: 400px;
             bottom: 10%;
@@ -428,7 +411,7 @@
         }
 
         .shape-3 {
-            background: #353635;
+            background: #555555;
             width: 250px;
             height: 250px;
             top: 50%;
@@ -719,9 +702,6 @@
                                     <div class="circle circle-3">
 
                                     </div>
-                                    <div class="circle circle-3">
-
-                                    </div>
                                     <div class="circle circle-4">
 
                                     </div>
@@ -759,9 +739,6 @@
                                     <div class="circle circle-3">
 
                                     </div>
-                                    <div class="circle circle-3">
-
-                                    </div>
                                     <div class="circle circle-4">
 
                                     </div>
@@ -794,9 +771,6 @@
 
                                     </div>
                                     <div class="circle circle-2">
-
-                                    </div>
-                                    <div class="circle circle-3">
 
                                     </div>
                                     <div class="circle circle-3">
@@ -1032,9 +1006,7 @@
                                     <div class="circle circle-2">
 
                                     </div>
-                                    <div class="circle circle-3">
 
-                                    </div>
                                     <div class="circle circle-3">
 
                                     </div>
@@ -1072,9 +1044,6 @@
 
                                     </div>
                                     <div class="circle circle-2">
-
-                                    </div>
-                                    <div class="circle circle-3">
 
                                     </div>
                                     <div class="circle circle-3">
@@ -1119,9 +1088,7 @@
                                     <div class="circle circle-3">
 
                                     </div>
-                                    <div class="circle circle-3">
 
-                                    </div>
                                     <div class="circle circle-4">
 
                                     </div>
@@ -1286,6 +1253,14 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Gasp.js-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+
+    <!-- Particles.js -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
     <script>
         // Navbar scroll effect
         window.addEventListener('scroll', function () {
@@ -1323,6 +1298,7 @@
             initScrollAnimations();
         });
 
+        //Animate skills section
         document.addEventListener('DOMContentLoaded', function () {
             const skillItems = document.querySelectorAll('.skill-item');
 
@@ -1370,6 +1346,7 @@
             });
         });
 
+        // Initalize particles.js
         function initParticles() {
             particlesJS('particles-js', {
                 particles: {
@@ -1409,6 +1386,7 @@
             initParticles();
         });
 
+        // Custom Cursor functionality
         function initCustomCursor() {
             const cursor = document.querySelector('.cursor');
             const cursorFollower = document.querySelector('.cursor-follower');
