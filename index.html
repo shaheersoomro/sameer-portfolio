@@ -19,505 +19,9 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
         rel="stylesheet">
-    <style>
-        :root {
-            --primary: #4d8ee6;
-            /* Blue accent color */
-            --dark: #070707;
-            /* Black background */
-            --light: #ffffff;
-            /* White text */
-            --gray: #a0a0a0;
-            /* Light gray for secondary text */
-        }
 
-        body {
-            font-family: "Inter", sans-serif;
-            color: var(--light);
-            background-color: var(--dark);
-            overflow-x: hidden;
-        }
+    <link rel="stylesheet" href="main.css">
 
-        .navbar {
-            /* background-color: rgba(0, 0, 0, 0.9) !important; */
-            transition: all 0.3s ease;
-        }
-
-        .navbar.scrolled {
-            background-color: rgba(0, 0, 0, 0.95) !important;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .navbar-brand,
-        .nav-link {
-            color: var(--light) !important;
-
-        }
-
-        .nav-link:hover {
-            color: var(--primary) !important;
-        }
-
-        .hero-section,
-        .services-section,
-        .skills-section,
-        .contact-section {
-            min-height: 100vh;
-            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
-            background-image: url('wlc-bg1.jpg');
-            display: flex;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-content {
-            z-index: 2;
-        }
-
-        .hero-3d-model {
-            position: absolute;
-            right: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            opacity: 0.8;
-            max-width: 50%;
-            height: auto;
-        }
-
-        .section-title {
-            font-family: "DM Sans", sans-serif;
-            text-transform: uppercase;
-            position: relative;
-            display: inline-block;
-            margin-bottom: 60px;
-            color: var(--light);
-        }
-
-        .section-title:after {
-            content: '';
-            position: absolute;
-            width: 50%;
-            height: 3px;
-            background: var(--primary);
-            bottom: -10px;
-            left: 0;
-        }
-
-        .portfolio-item {
-            position: relative;
-            overflow: hidden;
-            border-radius: 8px;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
-            background: #111;
-        }
-
-        .portfolio-item:hover {
-            transform: translateY(-10px);
-            /* box-shadow: 0 15px 40px rgba(77, 142, 230, 0.2); */
-        }
-
-        .portfolio-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            transition: all 0.3s ease;
-        }
-
-        .portfolio-item:hover .portfolio-overlay {
-            opacity: 1;
-        }
-
-        .skill-bar {
-            height: 1px;
-            background: #333;
-            margin-bottom: 20px;
-        }
-
-        .skill-progress {
-            height: 100%;
-            background: var(--primary);
-            width: 0;
-            transition: width 1.5s ease-in-out;
-        }
-
-        .card {
-            background: #111;
-            border: none;
-            color: var(--light);
-        }
-
-        .card-body {
-            position: relative;
-            overflow: hidden;
-            z-index: 2;
-        }
-
-        .card-body.active {
-            background-color: #1a1a1a;
-        }
-
-        .card-body.active .circle {
-            transform: scale(1);
-        }
-
-        .card-body:hover {
-            transition: all 0.3s;
-            background-color: #1a1a1a;
-        }
-
-        .card-body:hover .circle {
-            transition: all 0.3s;
-            transform: scale(1);
-        }
-
-        .text-muted {
-            color: var(--gray) !important;
-        }
-
-        .btn-primary {
-            background-color: var(--primary) !important;
-        }
-
-        .btn-outline-primary {
-            color: var(--primary);
-            border-color: var(--primary);
-        }
-
-        .btn-outline-primary:hover {
-            background: var(--primary);
-            color: var(--dark);
-        }
-
-        .btn-outline-dark {
-            color: var(--light);
-            border-color: var(--light);
-        }
-
-        .btn-outline-dark:hover {
-            background: var(--light);
-            color: var(--dark);
-        }
-
-        .form-control {
-            background-color: #111;
-            border: 1px solid #333;
-            color: var(--light);
-        }
-
-        .form-control:focus {
-            background-color: #111 !important;
-            border-color: #ccc !important;
-            color: var(--light) !important;
-            box-shadow: none !important;
-        }
-
-        hr {
-            background-color: #333;
-        }
-
-        .circles-wrap {
-            position: absolute;
-            bottom: -32%;
-            left: auto;
-            z-index: -1;
-            right: -50%;
-        }
-
-        .circles {
-            height: 400px;
-            width: 400px;
-            display: flex;
-            position: relative;
-            align-items: center;
-            justify-content: center;
-            z-index: 1;
-            background: transparent;
-
-        }
-
-        .circle {
-            position: absolute;
-            border: none;
-            border-radius: 50%;
-            transform: scale(0);
-        }
-
-
-
-        .circle-1 {
-            height: 100px;
-            width: 100px;
-            display: inline-block;
-            z-index: 5;
-            background: #555555;
-        }
-
-        .circle-2 {
-            height: 200px;
-            width: 200px;
-            display: inline-block;
-            z-index: 4;
-            background: #444444;
-            ;
-        }
-
-        .circle-3 {
-            height: 300px;
-            width: 300px;
-            display: inline-block;
-            z-index: 3;
-            background: #333333;
-        }
-
-        .circle-4 {
-            height: 400px;
-            width: 400px;
-            display: inline-block;
-            z-index: 2;
-            background: #222222;
-        }
-
-        .square2 {
-            z-index: -2;
-            width: 24px;
-            height: 24px;
-            position: absolute;
-            left: 79%;
-            top: -1%;
-            background: #111111;
-        }
-
-        .square1 {
-            z-index: -2;
-            width: 12px;
-            height: 12px;
-            position: absolute;
-            left: 76%;
-            top: 4%;
-            background: #111111;
-        }
-
-        .bg-circle {
-            z-index: -2;
-            width: 425px;
-            height: 425px;
-            position: absolute;
-            left: 5%;
-            top: 4%;
-            border-radius: 50%;
-            background: #111111;
-        }
-
-        .rel {
-            position: relative;
-        }
-
-        .bg-lines span:first-child {
-            left: 10%;
-        }
-
-        .bg-lines span:nth-child(2) {
-            left: 20%;
-        }
-
-        .bg-lines span:nth-child(3) {
-            left: 30%;
-        }
-
-        .bg-lines span:nth-child(4) {
-            left: 40%;
-        }
-
-        .bg-lines span:nth-child(5) {
-            left: 50%;
-        }
-
-        .bg-lines span:nth-child(6) {
-            left: 60%;
-        }
-
-        .bg-lines span:nth-child(7) {
-            left: 70%;
-        }
-
-        .bg-lines span:nth-child(8) {
-            left: 80%;
-        }
-
-        .bg-lines span:nth-child(9) {
-            left: 90%;
-        }
-
-        .bg-lines span:nth-child(10) {
-            left: 100%;
-        }
-
-        .bg-lines span {
-            top: 0;
-            z-index: -1;
-            width: 1px;
-            height: 100%;
-            position: absolute;
-            animation: leftRightOne 18s infinite;
-            background: hsla(0, 0%, 100%, .05);
-        }
-
-        .shapes {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        .shape {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(60px);
-            opacity: 0.3;
-        }
-
-        .shape-1 {
-            background: #333333;
-            width: 300px;
-            height: 300px;
-            top: 20%;
-            left: 10%;
-            animation: float 15s infinite ease-in-out;
-        }
-
-        .shape-2 {
-            background: #444444;
-            width: 400px;
-            height: 400px;
-            bottom: 10%;
-            right: 10%;
-            animation: float 20s infinite ease-in-out reverse;
-        }
-
-        .shape-3 {
-            background: #555555;
-            width: 250px;
-            height: 250px;
-            top: 50%;
-            right: 30%;
-            animation: float 18s infinite ease-in-out;
-        }
-
-        @keyframes float {
-
-            0%,
-            100% {
-                transform: translate(0, 0);
-            }
-
-            25% {
-                transform: translate(50px, 50px);
-            }
-
-            50% {
-                transform: translate(0, 100px);
-            }
-
-            75% {
-                transform: translate(-50px, 50px);
-            }
-        }
-
-        .particles-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-        }
-
-
-        .cursor {
-            position: fixed;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.8);
-            pointer-events: none;
-            mix-blend-mode: difference;
-            z-index: 9999;
-            transform: translate(-50%, -50%);
-            transition: transform 0.1s ease;
-        }
-
-        .cursor-follower {
-            position: fixed;
-            width: 40px;
-            height: 40px;
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9998;
-            transform: translate(-50%, -50%);
-            transition: transform 0.3s ease, width 0.3s ease, height 0.3s ease;
-        }
-
-
-
-        /* Animation classes */
-        .fade-in {
-            animation: fadeIn 1s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
-        }
-
-        .slide-up {
-            animation: slideUp 0.8s ease-out;
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes leftRightOne {
-
-            0%,
-            to {
-                transform: translateX(0)
-            }
-
-            50% {
-                transform: translateX(-100px)
-            }
-        }
-    </style>
 </head>
 
 <body data-bs-spy="scroll" data-bs-target=".navbar">
@@ -525,6 +29,9 @@
         <div class="shape shape-1"></div>
         <div class="shape shape-2"></div>
         <div class="shape shape-3"></div>
+    </div>
+    <div class="nav-progress-container">
+        <div class="nav-progress-bar" id="NavProgressBar"></div>
     </div>
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top py-3">
@@ -582,7 +89,7 @@
                 </div>
                 <div class="col-lg-6">
                     <!-- Placeholder for 3D model viewer or image -->
-                    <img src="0bLoTC1FxpOF.jpg" alt="3D Model Example" class="img-fluid hero-3d-model fade-in">
+                    <img src="assets/hero.jpg" alt="3D Model Example" class="img-fluid hero-3d-model fade-in">
                 </div>
             </div>
         </div>
@@ -594,19 +101,36 @@
             <div class="row align-items-center">
                 <div class="col-lg-5 my-5 mb-lg-0 rel">
                     <div class="bg-circle"></div>
-                    <img src="author1.png" alt="About Me" class="img-fluid rounded shadow">
+                    <img src="assets/author1.png" alt="About Me" class="img-fluid rounded shadow">
                     <div class="square1"></div>
                     <div class="square2"></div>
                 </div>
                 <div class="col-lg-7 ps-lg-5">
                     <h2 class="section-title">About Me</h2>
                     <h4 class="mb-4">Professional 3D Artist specializing in product visualization</h4>
-                    <p class="mb-4">With over 7 years of experience in 3D modeling and rendering using Blender, I help
-                        brands showcase their products in the most compelling way possible. My work focuses on
-                        photorealistic product renders that elevate advertising campaigns and marketing materials.</p>
-                    <p class="mb-5">I combine technical expertise with artistic vision to create models that not only
-                        look great but also communicate your product's value proposition effectively.</p>
-                    <div class="row">
+                    <p class="mb-4">I'm passionate about creating stunning 3D visuals that tell stories and evoke
+                        emotions. My journey in 3D art began as a hobby and has grown into a full-fledged career where I
+                        get to bring ideas to life every day.</p>
+                    <p class="mb-5">When I'm not modeling or animating, you can find me teaching Blender techniques to
+                        aspiring artists or contributing to open-source 3D projects.</p>
+                    <div class="d-flex flex-wrap mt-4">
+                        <div class="me-4 mb-3">
+                            <h3 class="fw-bold counter" style="color: var(--primary);" data-target="50"
+                                data-duration="2000">0</h3>
+                            <p class="mb-0">Projects Completed</p>
+                        </div>
+                        <div class="me-4 mb-3">
+                            <h3 class="fw-bold counter" style="color: var(--primary);" data-target="10"
+                                data-duration="1500">0</h3>
+                            <p class="mb-0">Happy Clients</p>
+                        </div>
+                        <div class="mb-3">
+                            <h3 class="fw-bold counter" style="color: var(--primary);" data-target="5"
+                                data-duration="1000">0</h3>
+                            <p class="mb-0">Years Experience</p>
+                        </div>
+                    </div>
+                    <!-- <div class="row">
                         <div class="col-md-6 mb-4">
                             <div class="d-flex align-items-center">
                                 <div class="rounded-circle p-2 me-3" style="background: rgba(77, 142, 230, 0.1);">
@@ -651,7 +175,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -799,7 +323,7 @@
             <div class="row">
                 <div class="col-md-4 mb-4">
                     <div class="portfolio-item">
-                        <img src="portfolio-1.jpeg" alt="Portfolio Item" class="img-fluid">
+                        <img src="assets/portfolio-1.jpeg" alt="Portfolio Item" class="img-fluid">
                         <div class="portfolio-overlay text-center px-3">
                             <h4 class="text-white mb-3">Cosmetic Product</h4>
                             <p class="text-white mb-4">High-end beauty product rendering for print ad campaign</p>
@@ -809,7 +333,7 @@
                 </div>
                 <div class="col-md-4 mb-4">
                     <div class="portfolio-item">
-                        <img src="portfolio-2.jpg" alt="Portfolio Item" class="img-fluid">
+                        <img src="assets/portfolio-2.jpg" alt="Portfolio Item" class="img-fluid">
                         <div class="portfolio-overlay text-center px-3">
                             <h4 class="text-white mb-3">Electronics</h4>
                             <p class="text-white mb-4">Smartphone model for e-commerce product page</p>
@@ -819,7 +343,7 @@
                 </div>
                 <div class="col-md-4 mb-4">
                     <div class="portfolio-item">
-                        <img src="portfolio-5.jpg" alt="Portfolio Item" class="img-fluid">
+                        <img src="assets/portfolio-5.jpg" alt="Portfolio Item" class="img-fluid">
                         <div class="portfolio-overlay text-center px-3">
                             <h4 class="text-white mb-3">Packaging</h4>
                             <p class="text-white mb-4">Beverage bottle and label design visualization</p>
@@ -829,7 +353,7 @@
                 </div>
                 <div class="col-md-4 mb-4">
                     <div class="portfolio-item">
-                        <img src="portfolio-5.jpg" alt="Portfolio Item" class="img-fluid">
+                        <img src="assets/portfolio-5.jpg" alt="Portfolio Item" class="img-fluid">
                         <div class="portfolio-overlay text-center px-3">
                             <h4 class="text-white mb-3">Furniture</h4>
                             <p class="text-white mb-4">Modern chair design for catalog and website</p>
@@ -839,7 +363,7 @@
                 </div>
                 <div class="col-md-4 mb-4">
                     <div class="portfolio-item">
-                        <img src="portfolio-2.jpg" alt="Portfolio Item" class="img-fluid">
+                        <img src="assets/portfolio-2.jpg" alt="Portfolio Item" class="img-fluid">
                         <div class="portfolio-overlay text-center px-3">
                             <h4 class="text-white mb-3">Automotive</h4>
                             <p class="text-white mb-4">Car accessory visualization for marketing materials</p>
@@ -849,7 +373,7 @@
                 </div>
                 <div class="col-md-4 mb-4">
                     <div class="portfolio-item">
-                        <img src="portfolio-1.jpeg" alt="Portfolio Item" class="img-fluid">
+                        <img src="assets/portfolio-1.jpeg" alt="Portfolio Item" class="img-fluid">
                         <div class="portfolio-overlay text-center px-3">
                             <h4 class="text-white mb-3">Jewelry</h4>
                             <p class="text-white mb-4">Luxury watch rendering for advertisement</p>
@@ -1259,173 +783,8 @@
     <!-- Particles.js -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 
-    <script>
-        // Navbar scroll effect
-        window.addEventListener('scroll', function () {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
+    <script src="main.js"></script>
 
-        // Animation on scroll
-        function initScrollAnimations() {
-            gsap.registerPlugin(ScrollTrigger);
-
-            // Animate sections
-            gsap.utils.toArray('section').forEach(section => {
-                gsap.from(section, {
-                    scrollTrigger: {
-                        trigger: section,
-                        start: "top 80%",
-                        toggleActions: "play none none none"
-                    },
-                    opacity: 0,
-                    y: 50,
-                    duration: 1
-                });
-            });
-
-
-        }
-
-        // Call this when DOM is loaded
-        document.addEventListener('DOMContentLoaded', function () {
-            initScrollAnimations();
-        });
-
-        //Animate skills section
-        document.addEventListener('DOMContentLoaded', function () {
-            const skillItems = document.querySelectorAll('.skill-item');
-
-            function animateSkill(item) {
-                const progressBar = item.querySelector('.skill-progress');
-                const percentageSpan = item.querySelector('span');
-
-                // Get the target width from the data attribute or inline style
-                const targetWidth = progressBar.dataset.width ||
-                    progressBar.style.width ||
-                    getComputedStyle(progressBar).width;
-
-                // Extract just the percentage number
-                const targetPercentage = parseInt(targetWidth);
-
-                // Reset initial state
-                progressBar.style.width = '0%';
-                percentageSpan.textContent = '0%';
-
-                // Start animations
-                setTimeout(() => {
-                    progressBar.style.width = targetWidth + '%';
-
-                    let current = 0;
-                    const increment = targetPercentage / 50;
-                    const timer = setInterval(() => {
-                        current += increment;
-                        if (current >= targetPercentage) {
-                            current = targetPercentage;
-                            clearInterval(timer);
-                        }
-                        percentageSpan.textContent = Math.floor(current) + '%';
-                    }, 20);
-                }, 100);
-            }
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const item = entry.target;
-                        if (!item.classList.contains('animated')) {
-                            item.classList.add('animated');
-                            animateSkill(item);
-                        }
-                        observer.unobserve(item);
-                    }
-                });
-            }, { threshold: 0.5 });
-
-            skillItems.forEach(item => {
-                observer.observe(item);
-            });
-        });
-
-        // Initalize particles.js
-        function initParticles() {
-            particlesJS('particles-js', {
-                particles: {
-                    number: { value: 80, density: { enable: true, value_area: 800 } },
-                    color: { value: "#ffffff" },
-                    shape: { type: "circle" },
-                    opacity: { value: 0.5, random: true },
-                    size: { value: 3, random: true },
-                    line_linked: {
-                        enable: true,
-                        distance: 150,
-                        color: "#ffffff",
-                        opacity: 0.4,
-                        width: 1
-                    },
-                    move: {
-                        enable: true,
-                        speed: 2,
-                        direction: "none",
-                        random: true,
-                        straight: false,
-                        out_mode: "out"
-                    }
-                },
-                interactivity: {
-                    detect_on: "canvas",
-                    events: {
-                        onhover: { enable: true, mode: "repulse" },
-                        onclick: { enable: true, mode: "push" }
-                    }
-                }
-            });
-        }
-
-        // Call this when DOM is loaded
-        document.addEventListener('DOMContentLoaded', function () {
-            initParticles();
-        });
-
-        // Custom Cursor functionality
-        function initCustomCursor() {
-            const cursor = document.querySelector('.cursor');
-            const cursorFollower = document.querySelector('.cursor-follower');
-
-            document.addEventListener('mousemove', (e) => {
-                cursor.style.left = e.clientX + 'px';
-                cursor.style.top = e.clientY + 'px';
-
-                setTimeout(() => {
-                    cursorFollower.style.left = e.clientX + 'px';
-                    cursorFollower.style.top = e.clientY + 'px';
-                }, 100);
-            });
-
-            document.querySelectorAll('a, button, .project-card').forEach(el => {
-                el.addEventListener('mouseenter', () => {
-                    cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
-                    cursorFollower.style.width = '20px';
-                    cursorFollower.style.height = '20px';
-                });
-
-                el.addEventListener('mouseleave', () => {
-                    cursor.style.transform = 'translate(-50%, -50%) scale(1)';
-                    cursorFollower.style.width = '40px';
-                    cursorFollower.style.height = '40px';
-                });
-            });
-        }
-
-        // Call this when DOM is loaded
-        document.addEventListener('DOMContentLoaded', function () {
-            initCustomCursor();
-        });
-    </script>
 </body>
 
 </html>
