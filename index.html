@@ -148,7 +148,7 @@
             height: 100%;
             background: var(--primary);
             width: 0;
-            transition: width 0s;
+            transition: width 1.5s ease-in-out;
         }
 
         .card {
@@ -591,7 +591,6 @@
     <!-- About Section -->
     <section id="about" class="rel z-1">
         <div class="container">
-
             <div class="row align-items-center">
                 <div class="col-lg-5 my-5 mb-lg-0 rel">
                     <div class="bg-circle"></div>
@@ -923,7 +922,7 @@
                             <span>95%</span>
                         </div>
                         <div class="skill-bar">
-                            <div class="skill-progress" style="width: 95%"></div>
+                            <div class="skill-progress" data-width="95"></div>
                         </div>
                     </div>
                     <div class="skill-item mb-4">
@@ -932,7 +931,7 @@
                             <span>90%</span>
                         </div>
                         <div class="skill-bar">
-                            <div class="skill-progress" style="width: 90%"></div>
+                            <div class="skill-progress" data-width="90"></div>
                         </div>
                     </div>
                     <div class="skill-item mb-4">
@@ -941,7 +940,7 @@
                             <span>92%</span>
                         </div>
                         <div class="skill-bar">
-                            <div class="skill-progress" style="width: 92%"></div>
+                            <div class="skill-progress" data-width="92"></div>
                         </div>
                     </div>
                     <div class="skill-item mb-4">
@@ -950,7 +949,7 @@
                             <span>88%</span>
                         </div>
                         <div class="skill-bar">
-                            <div class="skill-progress" style="width: 88%"></div>
+                            <div class="skill-progress" data-width="88"></div>
                         </div>
                     </div>
                     <div class="skill-item mb-4">
@@ -959,7 +958,7 @@
                             <span>85%</span>
                         </div>
                         <div class="skill-bar">
-                            <div class="skill-progress" style="width: 85%"></div>
+                            <div class="skill-progress" data-width="85"></div>
                         </div>
                     </div>
                 </div>
@@ -1304,22 +1303,29 @@
             function animateSkill(item) {
                 const progressBar = item.querySelector('.skill-progress');
                 const percentageSpan = item.querySelector('span');
-                const targetWidth = progressBar.style.width;
-                const targetPercentage = percentageSpan.textContent;
 
-                progressBar.style.width = '0';
+                // Get the target width from the data attribute or inline style
+                const targetWidth = progressBar.dataset.width ||
+                    progressBar.style.width ||
+                    getComputedStyle(progressBar).width;
+
+                // Extract just the percentage number
+                const targetPercentage = parseInt(targetWidth);
+
+                // Reset initial state
+                progressBar.style.width = '0%';
                 percentageSpan.textContent = '0%';
-                progressBar.style.transition = 'width 1.5s ease-in-out';
 
+                // Start animations
                 setTimeout(() => {
-                    progressBar.style.width = targetWidth;
+                    progressBar.style.width = targetWidth + '%';
 
                     let current = 0;
-                    const increment = targetPercentage.replace('%', '') / 50;
+                    const increment = targetPercentage / 50;
                     const timer = setInterval(() => {
                         current += increment;
-                        if (current >= parseFloat(targetPercentage)) {
-                            current = parseFloat(targetPercentage);
+                        if (current >= targetPercentage) {
+                            current = targetPercentage;
                             clearInterval(timer);
                         }
                         percentageSpan.textContent = Math.floor(current) + '%';
