@@ -52,6 +52,53 @@ body {
     width: 0%;
 }
 
+.resume-area-two {
+    -webkit-clip-path: polygon(50% 0, 100% 65px, 100% 100%, 0 100%, 0 65px);
+    clip-path: polygon(50% 0, 100% 65px, 100% 100%, 0 100%, 0 65px);
+}
+
+.headline-area-h2 {
+    transform: rotate(4.4deg);
+}
+
+.marquee-wrap {
+    display: flex;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.marquee-inner.left {
+    animation: marquee_left 20s linear infinite;
+}
+
+
+.marquee-inner {
+    display: flex;
+}
+
+.marquee-item {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 700;
+    margin-right: 20px;
+    text-transform: uppercase;
+}
+
+.marquee-item i {
+    margin-left: 30px;
+    color: var(--primary);
+}
+
+@keyframes marquee_left {
+    0% {
+        transform: translateZ(0)
+    }
+
+    to {
+        transform: translate3d(-100%, 0, 0)
+    }
+}
+
 .hero-section,
 .services-section,
 .skills-section,
