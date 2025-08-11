@@ -17,9 +17,51 @@ function initScrollAnimations() {
   });
 }
 
+function initScrollAnimations2() {
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Animate sections
+  gsap.utils.toArray(".card").forEach((card, i) => {
+    gsap.from(card, {
+      scrollTrigger: {
+        trigger: card,
+        start: "top 90%",
+        toggleActions: "play none none none",
+      },
+      opacity: 0,
+      y: 100,
+      duration: 1,
+      delay: i * 0.1,
+      ease: "back.out(1.2)"
+    });
+  });
+}
+
+function initScrollAnimations3() {
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Animate sections
+  gsap.utils.toArray(".portfolio-item").forEach((item, i) => {
+    gsap.from(item, {
+      scrollTrigger: {
+        trigger: item,
+        start: "top 90%",
+        toggleActions: "play none none none",
+      },
+      opacity: 0,
+      y: 100,
+      duration: 1,
+      delay: i * 0.1,
+      ease: "back.out(1.2)"
+    });
+  });
+}
+
 // Call this when DOM is loaded
 document.addEventListener("DOMContentLoaded", function () {
   initScrollAnimations();
+  initScrollAnimations2();
+  initScrollAnimations3();
 });
 
 // Scroll progress bar
