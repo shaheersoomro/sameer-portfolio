@@ -9,6 +9,10 @@
     /* Light gray for secondary text */
 }
 
+html {
+  scroll-padding-top: 72px; /* Adds 100px of padding at the top of the scrollport */
+}
+
 body {
     margin: 0;
     padding: 0;
