@@ -10,6 +10,8 @@
 }
 
 body {
+    margin: 0;
+    padding: 0;
     font-family: "Inter", sans-serif;
     color: var(--light);
     background-color: var(--dark);
@@ -513,6 +515,7 @@ hr {
     transform: translate(-50%, -50%);
     transition: transform 0.3s ease, width 0.3s ease, height 0.3s ease;
 }
+
 
 
 

@@ -1,20 +1,22 @@
-// Animation on scroll
 function initScrollAnimations() {
   gsap.registerPlugin(ScrollTrigger);
 
-  // Animate sections
-  gsap.utils.toArray("section").forEach((section) => {
-    gsap.from(section, {
-      scrollTrigger: {
-        trigger: section,
-        start: "top 80%",
-        toggleActions: "play none none none",
-      },
-      opacity: 0,
-      y: 50,
-      duration: 1,
+  // Wait briefly for DOM stability
+  setTimeout(() => {
+    gsap.utils.toArray("section").forEach((section) => {
+      gsap.from(section, {
+        opacity: 0,
+        y: 50,
+        duration: 1,
+        scrollTrigger: {
+          trigger: section,
+          start: "top 80%",
+          toggleActions: "play none none none",
+          immediateRender: false, // Prevents initial flicker
+        },
+      });
     });
-  });
+  }, 100); // 100ms delay
 }
 
 function initScrollAnimations2() {
