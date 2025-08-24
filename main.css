@@ -132,6 +132,18 @@ body {
     height: auto;
 }
 
+.sphere-container {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.9;
+    max-width: 50%;
+    height: auto;
+    min-height: 400px;
+    width: 100%;
+}
+
 .section-title {
     font-family: "DM Sans", sans-serif;
     text-transform: uppercase;
