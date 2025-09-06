@@ -139,9 +139,9 @@ body {
     transform: translateY(-50%);
     opacity: 0.9;
     max-width: 50%;
-    height: auto;
-    min-height: 400px;
+    height: 400px; /* Fixed height for proper rendering */
     width: 100%;
+    z-index: 2; /* Ensure it's above other elements */
 }
 
 .section-title {

@@ -6,7 +6,7 @@ function initScrollAnimations() {
     gsap.utils.toArray("section").forEach((section) => {
       gsap.from(section, {
         opacity: 0,
-        y: 50,
+        x: -50,
         duration: 1,
         scrollTrigger: {
           trigger: section,
@@ -31,8 +31,8 @@ function initScrollAnimations2() {
         toggleActions: "play none none none",
       },
       opacity: 0,
-      y: 100,
-      duration: 1,
+      x: -50,
+      duration: 2,
       delay: i * 0.1,
       ease: "back.out(1.2)"
     });
@@ -51,8 +51,8 @@ function initScrollAnimations3() {
         toggleActions: "play none none none",
       },
       opacity: 0,
-      y: 100,
-      duration: 1,
+      x: -50,
+      duration: 2,
       delay: i * 0.1,
       ease: "back.out(1.2)"
     });
@@ -278,17 +278,3 @@ function initCustomCursor() {
 document.addEventListener("DOMContentLoaded", function () {
   initCustomCursor();
 });
-
-// Throttle function for better performance
-function throttle(func, limit) {
-  let inThrottle;
-  return function() {
-    const args = arguments;
-    const context = this;
-    if (!inThrottle) {
-      func.apply(context, args);
-      inThrottle = true;
-      setTimeout(() => inThrottle = false, limit);
-    }
-  }
-}
