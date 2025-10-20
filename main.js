@@ -278,3 +278,67 @@ function initCustomCursor() {
 document.addEventListener("DOMContentLoaded", function () {
   initCustomCursor();
 });
+
+
+// ===== LENIS SMOOTH SCROLL =====
+let lenis;
+
+function initLenis() {
+    lenis = new Lenis({
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        smooth: true,
+    });
+
+    function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+    // Initialize shapes animation AFTER Lenis is ready
+    initShapesAnimation();
+}
+
+function initSmoothScroll() {
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            
+            // Calculate navbar height for offset
+            const navbar = document.querySelector('.navbar') || document.querySelector('header') || document.querySelector('nav');
+            const navbarHeight = navbar ? navbar.offsetHeight : 72;
+            
+            if (targetId === '#' || targetId === '#home') {
+                lenis.scrollTo(0, { duration: 1.5 });
+            } else {
+                const targetElement = document.querySelector(targetId);
+                if (targetElement && lenis) {
+                    // Scroll to element with offset for navbar
+                    const targetPosition = targetElement.offsetTop - navbarHeight;
+                    lenis.scrollTo(targetPosition, { duration: 1.5 });
+                }
+            }
+        });
+    });
+}
+
+function initShapesAnimation() {
+    // Animated shapes on scroll
+    lenis.on('scroll', (e) => {
+        const shapes = document.querySelectorAll('.shape');
+        shapes.forEach((shape, index) => {
+            const speed = (index + 1) * 0.5;
+            const yPos = Math.sin(e.scroll * 0.01 * speed) * 60;
+            const xPos = Math.cos(e.scroll * 0.01 * speed) * 60;
+            shape.style.transform = `translate(${xPos}px, ${yPos}px)`;
+        });
+    });
+}
+
+// Initialize everything when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    initLenis();
+    initSmoothScroll();
+});

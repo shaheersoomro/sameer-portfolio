@@ -446,7 +446,7 @@ hr {
 .shape {
     position: absolute;
     border-radius: 50%;
-    filter: blur(60px);
+    filter: blur(5px);
     opacity: 0.3;
 }
 
@@ -477,7 +477,7 @@ hr {
     animation: float 18s infinite ease-in-out;
 }
 
-@keyframes float {
+/* @keyframes float {
 
     0%,
     100% {
@@ -495,7 +495,7 @@ hr {
     75% {
         transform: translate(-50px, 50px);
     }
-}
+} */
 
 .particles-container {
     position: absolute;
@@ -577,3 +577,37 @@ hr {
         transform: translateX(-100px)
     }
 }
+
+
+/* ===== LENIS SMOOTH SCROLL STYLES ===== */
+html.lenis, html.lenis body {
+    height: auto;
+}
+
+.lenis.lenis-smooth {
+    scroll-behavior: auto;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+    overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+    pointer-events: none;
+}
+
+/* Basic smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
